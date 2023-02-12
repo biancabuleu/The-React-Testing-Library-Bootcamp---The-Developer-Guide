@@ -11,7 +11,7 @@ const Filter = ({ filters, setFilters }) => (
         onChange={(e) => {
           setFilters({
             ...filters,
-            favoured: e.target.value,
+            favoured: e.target.value === "favoured" ? true : false,
           });
         }}
       >

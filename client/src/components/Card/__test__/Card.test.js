@@ -18,11 +18,7 @@ const cardProps = {
 };
 
 const renderCardComponentWithProvider = (props) => {
-  render(
-    <PetsContext.Provider value={{ cats, setCats: () => {} }}>
-      <Card {...props} />
-    </PetsContext.Provider>
-  );
+  render(<Card {...props} />);
 };
 
 describe("Card", () => {

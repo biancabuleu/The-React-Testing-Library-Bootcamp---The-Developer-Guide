@@ -65,4 +65,15 @@ describe("Pets", () => {
       cards[4],
     ]);
   });
+
+  test("should filter for favoured male cats", async () => {
+    const cards = await screen.findAllByRole("article");
+    userEvent.click(within(cards[0]).getByRole("button")); // get the button from the card we want
+    userEvent.click(within(cards[3]).getByRole("button")); // get the button from the card we want
+
+    userEvent.selectOptions(screen.getByLabelText(/favourite/i), "favoured");
+    userEvent.selectOptions(screen.getByLabelText(/gender/i), "male");
+
+    expect(screen.getAllByRole("article")).toStrictEqual([cards[3]]);
+  });
 });

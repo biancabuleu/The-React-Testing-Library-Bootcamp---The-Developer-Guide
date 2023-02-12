@@ -3,12 +3,7 @@ import Filter from "../Filter/Filter";
 import Cards from "../Cards/Cards";
 
 import axios from "axios";
-import { useState, useEffect, createContext } from "react";
-
-export const PetsContext = createContext({
-  cats: [],
-  setCats: () => {},
-});
+import { useState, useEffect } from "react";
 
 const Pets = () => {
   const [cats, setCats] = useState([]);
@@ -35,7 +30,11 @@ const Pets = () => {
         (cat) => cat.gender === filters.gender
       );
     }
-
+    if (filters.favoured !== "any") {
+      catsFiltered = catsFiltered.filter(
+        (cat) => cat.favoured === filters.favoured
+      );
+    }
     setFilteredCats(catsFiltered);
   }, [filters, cats]);
 
@@ -43,7 +42,7 @@ const Pets = () => {
     <div className="container">
       <div className="app-container">
         <Filter filters={filters} setFilters={setFilters} />
-        <Cards cats={filteredCats} />
+        <Cards cats={filteredCats} setCats={setCats} />
       </div>
     </div>
   );
